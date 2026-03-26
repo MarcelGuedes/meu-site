@@ -13,8 +13,8 @@ header {
 }
 
 .logo {
-  width: 2cm;   /* largura fixa */
-  height: 2cm;  /* altura fixa */
+  width: 10cm;   /* largura fixa */
+  height: 10cm;  /* altura fixa */
   position: absolute;
   left: 20px;   /* fixa no canto esquerdo */
   top: 50%;
