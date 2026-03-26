@@ -4,7 +4,7 @@ const camera = new THREE.PerspectiveCamera(
   75,
   window.innerWidth/window.innerHeight,
   0.1,
-  1000
+  2000
 );
 
 const renderer = new THREE.WebGLRenderer({ antialias: true });
@@ -18,7 +18,7 @@ const texture = loader.load(
 );
 
 const globe = new THREE.Mesh(
-  new THREE.SphereGeometry(5, 64, 64),
+  new THREE.SphereGeometry(0.3, 16, 16)
   new THREE.MeshPhongMaterial({ map: texture })
 );
 
@@ -30,7 +30,7 @@ const texture = loader.load(
 );
 
 // 📷 CÂMERA
-camera.position.z = 12;
+camera.position.z = 15;
 
 // 📡 RÁDIOS
 let radios = [];
@@ -63,7 +63,7 @@ async function carregarRadios() {
     const pos = latLongToVector3(
       parseFloat(radio.latitude),
       parseFloat(radio.longitude),
-      5.2
+     5.5
     );
 
     const point = new THREE.Mesh(
