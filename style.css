@@ -5,31 +5,30 @@ body {
   color: #333;
 }
 
+/* ===== HEADER ===== */
 header {
   background: linear-gradient(135deg, #4CAF50, #2E7D32);
   color: white;
-  padding: 20px;
+  padding: 20px 20px 20px 100px; /* espaço pra logo */
   position: relative;
 }
 
+/* LOGO */
 .logo {
-  width: 20%;       /* aumenta a largura da logo */
-  height: 20%;       /* mantém proporção */
+  width: 80px;        /* ajuste aqui como quiser */
+  height: auto;       /* mantém proporção */
   position: absolute;
-  left: 20px;         /* fixa no canto esquerdo */
+  left: 20px;
   top: 50%;
-  transform: translateY(-50%); /* centraliza verticalmente */
+  transform: translateY(-50%);
 }
 
-
-
-
+/* TEXTO DO HEADER */
 .header-text {
-  text-align: center; /* centraliza o texto */
+  text-align: center;
 }
 
-
-
+/* ===== MENU ===== */
 nav {
   background: #333;
   padding: 10px;
@@ -51,8 +50,14 @@ nav a {
   color: white;
   text-decoration: none;
   font-weight: bold;
+  transition: 0.3s;
 }
 
+nav a:hover {
+  color: #4CAF50;
+}
+
+/* ===== CONTEÚDO ===== */
 section {
   padding: 40px 20px;
   max-width: 900px;
@@ -64,6 +69,7 @@ h2 {
   padding-bottom: 10px;
 }
 
+/* CARDS */
 .card {
   background: white;
   border: 1px solid #ddd;
@@ -73,9 +79,30 @@ h2 {
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
+/* ===== RODAPÉ ===== */
 footer {
   background: #222;
   color: white;
   text-align: center;
   padding: 15px;
+}
+
+/* ===== RESPONSIVO (celular) ===== */
+@media (max-width: 600px) {
+  header {
+    padding-left: 80px;
+  }
+
+  .logo {
+    width: 60px;
+  }
+
+  nav ul {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  nav li {
+    margin: 10px 0;
+  }
 }
