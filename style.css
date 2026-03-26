@@ -5,17 +5,24 @@ body {
   color: #333;
 }
 
-.logo {
-  width: 5cm;
-  height: 5cm;
-  margin-right: 20px;
+header {
+  background: linear-gradient(135deg, #4CAF50, #2E7D32);
+  color: white;
+  padding: 20px;
+  position: relative;
 }
 
-header .container {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start; /* alinha à esquerda */
-  padding: 20px;
+.logo {
+  width: 2cm;   /* largura fixa */
+  height: 2cm;  /* altura fixa */
+  position: absolute;
+  left: 20px;   /* fixa no canto esquerdo */
+  top: 50%;
+  transform: translateY(-50%); /* centraliza verticalmente */
+}
+
+.header-text {
+  text-align: center; /* centraliza o texto */
 }
 
 
