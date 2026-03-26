@@ -13,13 +13,14 @@ header {
 }
 
 .logo {
-  width: 10cm;   /* largura fixa */
-  height: 10cm;  /* altura fixa */
+  width: 4cm;      /* aumenta a largura */
+  height: 4cm;     /* aumenta a altura */
   position: absolute;
-  left: 20px;   /* fixa no canto esquerdo */
+  left: 20px;      /* fixa no canto esquerdo */
   top: 50%;
   transform: translateY(-50%); /* centraliza verticalmente */
 }
+
 
 .header-text {
   text-align: center; /* centraliza o texto */
