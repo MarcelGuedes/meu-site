@@ -16,12 +16,13 @@ body {
 
 
 
-header {
-  background: linear-gradient(135deg, #4CAF50, #2E7D32);
-  color: white;
-  padding: 40px 20px;
-  text-align: center;
+header .container {
+  display: flex;              /* coloca logo e texto lado a lado */
+  align-items: center;        /* centraliza verticalmente */
+  justify-content: center;    /* centraliza horizontalmente */
+  padding: 20px;              /* reduz altura do cabeçalho */
 }
+
 
 nav {
   background: #333;
