@@ -6,12 +6,11 @@ body {
 }
 
 .logo {
-  width: 100px;       /* controla o tamanho da logo */
+  max-width: 120px;   /* limita a largura da logo */
   height: auto;       /* mantém proporção */
-  display: inline-block;
-  vertical-align: middle;
   margin-right: 15px; /* espaço entre logo e texto */
 }
+
 
 
 
