@@ -1,5 +1,7 @@
+// ===== CENA =====
 const scene = new THREE.Scene();
 
+// ===== CAMERA =====
 const camera = new THREE.PerspectiveCamera(
   75,
   window.innerWidth/window.innerHeight,
@@ -7,13 +9,23 @@ const camera = new THREE.PerspectiveCamera(
   1000
 );
 
-const renderer = new THREE.WebGLRenderer({ antialias: true });
+camera.position.z = 12;
+
+// ===== RENDER =====
+const renderer = new THREE.WebGLRenderer({ antialias:true });
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
-// 🌍 TEXTURA REAL DA TERRA
-const loader = new THREE.TextureLoader();
-const texture = loader.load(
+// ===== LUZ =====
+const light = new THREE.PointLight(0xffffff, 2);
+light.position.set(10,10,10);
+scene.add(light);
+
+const ambient = new THREE.AmbientLight(0xffffff, 0.6);
+scene.add(ambient);
+
+// ===== GLOBO =====
+const texture = new THREE.TextureLoader().load(
   "https://threejs.org/examples/textures/land_ocean_ice_cloud_2048.jpg"
 );
 
@@ -24,22 +36,14 @@ const globe = new THREE.Mesh(
 
 scene.add(globe);
 
-// 💡 LUZ
-const light = new THREE.PointLight(0xffffff, 1.2);
-light.position.set(10, 10, 10);
-scene.add(light);
-
-// 📷 CÂMERA
-camera.position.z = 12;
-
-// 📡 RÁDIOS
+// ===== DADOS =====
 let radios = [];
-let radioPoints = [];
+let points = [];
 
-// 🔄 CONVERTER LAT/LONG
-function latLongToVector3(lat, lon, radius) {
-  const phi = (90 - lat) * (Math.PI / 180);
-  const theta = (lon + 180) * (Math.PI / 180);
+// ===== FUNÇÃO LAT/LON =====
+function latLongToVector3(lat, lon, radius){
+  const phi = (90 - lat) * (Math.PI/180);
+  const theta = (lon + 180) * (Math.PI/180);
 
   return new THREE.Vector3(
     -(radius * Math.sin(phi) * Math.cos(theta)),
@@ -48,97 +52,100 @@ function latLongToVector3(lat, lon, radius) {
   );
 }
 
-// 📡 BUSCAR RÁDIOS DA INTERNET
-async function carregarRadios() {
+// ===== CARREGAR RÁDIOS =====
+async function carregarRadios(){
+
   const res = await fetch(
-    "https://de1.api.radio-browser.info/json/stations/topclick/100"
+    "https://de1.api.radio-browser.info/json/stations/search?has_geo_info=true&limit=200"
   );
 
   radios = await res.json();
 
-  radios.forEach((radio, idx) => {
+  radios.forEach((radio, i)=>{
 
-    if (!radio.latitude || !radio.longitude) return;
+    const lat = parseFloat(radio.latitude);
+    const lon = parseFloat(radio.longitude);
 
-    const pos = latLongToVector3(
-      parseFloat(radio.latitude),
-      parseFloat(radio.longitude),
-      5.2
+    if(isNaN(lat) || isNaN(lon)) return;
+
+    const pos = latLongToVector3(lat, lon, 5.3);
+
+    // PONTO
+    const point = new THREE.Mesh(
+      new THREE.SphereGeometry(0.25,16,16),
+      new THREE.MeshStandardMaterial({
+        color:0x00ff00,
+        emissive:0x00ff00,
+        emissiveIntensity:1.5
+      })
     );
 
-    const point = new THREE.Mesh(
-     new THREE.SphereGeometry(0.25, 16, 16),
-      new THREE.MeshStandardMaterial({
-  color: 0x00ff00,
-  emissive: 0x00ff00,
-  emissiveIntensity: 1
-})
-
     point.position.copy(pos);
-    point.userData = { idx };
+    point.userData = { index:i };
 
     scene.add(point);
-    radioPoints.push(point);
+    points.push(point);
   });
 
-  document.getElementById('info').innerHTML =
-    "🌍 Rádios carregadas! Clique em um ponto";
+  document.getElementById("info").innerHTML =
+    `🌍 ${points.length} rádios carregadas`;
 }
 
 carregarRadios();
 
-// 🎯 CLIQUE
+// ===== CLICK =====
 const raycaster = new THREE.Raycaster();
 const mouse = new THREE.Vector2();
 
-window.addEventListener('click', (event) => {
+window.addEventListener("click",(event)=>{
 
-  mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-  mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+  mouse.x = (event.clientX/window.innerWidth)*2 -1;
+  mouse.y = -(event.clientY/window.innerHeight)*2 +1;
 
-  raycaster.setFromCamera(mouse, camera);
+  raycaster.setFromCamera(mouse,camera);
 
-  const intersects = raycaster.intersectObjects(radioPoints);
+  const hits = raycaster.intersectObjects(points);
 
-  if (intersects.length > 0) {
+  if(hits.length > 0){
 
-    const idx = intersects[0].object.userData.idx;
-    const radio = radios[idx];
+    const index = hits[0].object.userData.index;
+    const radio = radios[index];
 
-    document.getElementById('info').innerHTML =
+    document.getElementById("info").innerHTML =
       `<b>${radio.name}</b><br>${radio.country}`;
 
-    radioPoints.forEach((p,i) =>
-      p.material.color.set(i === idx ? 0xffff00 : 0x00ff00)
-    );
+    // destaque
+    points.forEach((p,i)=>{
+      p.material.color.set(i===index ? 0xffff00 : 0x00ff00);
+    });
 
-    const player = document.getElementById('player');
+    const player = document.getElementById("player");
 
     player.pause();
     player.src = radio.url_resolved;
     player.load();
 
-    player.play().catch(() => {
-      document.getElementById('info').innerHTML +=
-        "<br><small>Essa rádio bloqueou o player</small>";
+    player.play().catch(()=>{
+      document.getElementById("info").innerHTML +=
+        "<br><small>Rádio bloqueada</small>";
     });
   }
 });
 
-// 🔄 ANIMAÇÃO
-function animate() {
+// ===== ANIMAÇÃO =====
+function animate(){
   requestAnimationFrame(animate);
 
   globe.rotation.y += 0.0015;
 
-  renderer.render(scene, camera);
+  renderer.render(scene,camera);
 }
 
 animate();
 
-// 📱 RESPONSIVO
-window.addEventListener('resize', () => {
+// ===== RESPONSIVO =====
+window.addEventListener("resize",()=>{
   camera.aspect = window.innerWidth/window.innerHeight;
   camera.updateProjectionMatrix();
-  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setSize(window.innerWidth,window.innerHeight);
 });
