@@ -15,7 +15,7 @@ header {
 
 /* LOGO */
 .logo {
-  width: 120px;        /* ajuste aqui como quiser */
+  width: 60em;        /* ajuste aqui como quiser */
   height: auto;       /* mantém proporção */
   position: absolute;
   left: 20px;
