@@ -6,22 +6,18 @@ body {
 }
 
 .logo {
-  max-width: 120px;   /* limita a largura da logo */
-  height: auto;       /* mantém proporção */
-  margin-right: 15px; /* espaço entre logo e texto */
+  width: 2cm;
+  height: 2cm;
+  margin-right: 20px;
 }
-
-
-
-
-
 
 header .container {
-  display: flex;              /* coloca logo e texto lado a lado */
-  align-items: center;        /* centraliza verticalmente */
-  justify-content: center;    /* centraliza horizontalmente */
-  padding: 20px;              /* reduz altura do cabeçalho */
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* alinha à esquerda */
+  padding: 20px;
 }
+
 
 
 nav {
