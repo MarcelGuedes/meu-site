@@ -25,9 +25,9 @@ const globe = new THREE.Mesh(
 scene.add(globe);
 
 // 💡 LUZ
-const light = new THREE.PointLight(0xffffff, 1.2);
-light.position.set(10, 10, 10);
-scene.add(light);
+const texture = loader.load(
+  "https://threejs.org/examples/textures/land_ocean_ice_cloud_2048.jpg"
+);
 
 // 📷 CÂMERA
 camera.position.z = 12;
