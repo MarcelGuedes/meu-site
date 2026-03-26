@@ -13,7 +13,7 @@ header {
 }
 
 .logo {
-  width: 200em;       /* aumenta a largura da logo */
+  width: 100em;       /* aumenta a largura da logo */
   height: auto;       /* mantém proporção */
   position: absolute;
   left: 20px;         /* fixa no canto esquerdo */
