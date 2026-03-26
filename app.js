@@ -67,9 +67,12 @@ async function carregarRadios() {
     );
 
     const point = new THREE.Mesh(
-      new THREE.SphereGeometry(0.12, 8, 8),
-      new THREE.MeshBasicMaterial({ color: 0x00ff00 })
-    );
+     new THREE.SphereGeometry(0.25, 16, 16),
+      new THREE.MeshStandardMaterial({
+  color: 0x00ff00,
+  emissive: 0x00ff00,
+  emissiveIntensity: 1
+})
 
     point.position.copy(pos);
     point.userData = { idx };
