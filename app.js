@@ -19,7 +19,7 @@ const texture = loader.load(
 
 const globe = new THREE.Mesh(
   new THREE.SphereGeometry(5, 64, 64),
-  new THREE.MeshStandardMaterial({ map: texture })
+  new THREE.MeshPhongMaterial({ map: texture })
 );
 
 scene.add(globe);
