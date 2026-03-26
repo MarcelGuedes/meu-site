@@ -6,11 +6,13 @@ body {
 }
 
 .logo {
-  width: 120px;
+  width: 150px;         /* Tamanho ideal para topo */
   height: auto;
   display: block;
   margin: 0 auto 20px auto;
+  max-width: 100%;      /* Garante que não ultrapasse a largura da tela */
 }
+
 
 
 
