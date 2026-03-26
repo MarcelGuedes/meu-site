@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <title>Globo Rádio - Toca Direto</title>
+  <style>
+    body { margin: 0; overflow: hidden; background: #111; }
+    #info { position: absolute; top: 10px; left: 10px; color: #fff; background: rgba(0,0,0,0.7); padding: 8px; border-radius: 6px; font-family: sans-serif; z-index: 10;}
+    #player { display:none; }
+  </style>
+</head>
+<body>
+<div id="info">Clique nos pontos verdes para ouvir a rádio.</div>
+<audio id="player"></audio>
+<script src="https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.min.js"></script>
+<script>
+// Troque pelos links reais das rádios!
+const radios = [
+  { nome: "Rádio Cidade", latitude: -23.55, longitude: -46.63, url: "https://stream-ssl.radios.com.br/stream/123456" },
+  { nome: "Radio Paris", latitude: 48.85, longitude: 2.35, url: "https://stream-ssl.radios.com.br/stream/654321" },
+  { nome: "Radio New York", latitude: 40.71, longitude: -74.00, url: "https://stream-ssl.radios.com.br/stream/789012" }
+];
+
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+const renderer = new THREE.WebGLRenderer();
+renderer.setSize(window.innerWidth, window.innerHeight);
+document.body.appendChild(renderer.domElement);
+
+const radius = 5;
+const geometry = new THREE.SphereGeometry(radius, 32, 32);
+const material = new THREE.MeshBasicMaterial({ color: 0x0077ff, wireframe: true });
+const globe = new THREE.Mesh(geometry, material);
+scene.add(globe);
+
+function latLongToVector3(lat, lon, radius) {
+  var phi = (90 - lat) * (Math.PI / 180);
+  var theta = (lon + 180) * (Math.PI / 180);
+  return new THREE.Vector3(
+    -(radius * Math.sin(phi) * Math.cos(theta)),
+    radius * Math.cos(phi),
+    radius * Math.sin(phi) * Math.sin(theta)
+  );
+}
+
+const radioPoints = [];
+radios.forEach((radio, idx) => {
+  const pos = latLongToVector3(radio.latitude, radio.longitude, radius + 0.2);
+  const pointGeometry = new THREE.SphereGeometry(0.18, 8, 8);
+  const pointMaterial = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+  const point = new THREE.Mesh(pointGeometry, pointMaterial);
+  point.position.copy(pos);
+  point.userData = { idx };
+  scene.add(point);
+  radioPoints.push(point);
+});
+
+camera.position.z = 13;
+
+const raycaster = new THREE.Raycaster();
+const mouse = new THREE.Vector2();
+
+let targetRotationY = null;
+let targetRotationX = null;
+let rotating = false;
+
+window.addEventListener('click', function(event) {
+  mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+  mouse.y = - (event.clientY / window.innerHeight) * 2 + 1;
+  raycaster.setFromCamera(mouse, camera);
+  const intersects = raycaster.intersectObjects(radioPoints);
+  if (intersects.length > 0) {
+    const idx = intersects[0].object.userData.idx;
+    document.getElementById('info').innerHTML = `<b>${radios[idx].nome}</b>`;
+    radioPoints.forEach((p,i) => p.material.color.set(i === idx ? 0xffff00 : 0x00ff00));
+    // Rotação do globo
+    const lat = radios[idx].latitude * Math.PI / 180;
+    const lon = radios[idx].longitude * Math.PI / 180;
+    targetRotationY = lon + Math.PI;
+    targetRotationX = lat - Math.PI/2;
+    rotating = true;
+    // Toca a rádio imediatamente
+    const player = document.getElementById('player');
+    player.src = radios[idx].url;
+    player.load();
+    player.play().catch(e => {
+      document.getElementById('info').innerHTML += "<br><small>O navegador bloqueou o autoplay.<br>Clique novamente ou habilite o som.</small>";
+    });
+  }
+});
+
+function animate() {
+  requestAnimationFrame(animate);
+  if(rotating && targetRotationY !== null && targetRotationX !== null){
+    globe.rotation.y += (targetRotationY - globe.rotation.y) * 0.08;
+    globe.rotation.x += (targetRotationX - globe.rotation.x) * 0.08;
+    if(Math.abs(globe.rotation.y - targetRotationY) < 0.01 && Math.abs(globe.rotation.x - targetRotationX) < 0.01){
+      globe.rotation.y = targetRotationY;
+      globe.rotation.x = targetRotationX;
+      rotating = false;
+    }
+  }
+  renderer.render(scene, camera);
+}
+animate();
+
+window.addEventListener('resize', () => {
+  camera.aspect = window.innerWidth/window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
+</script>
+</body>
+</html>
