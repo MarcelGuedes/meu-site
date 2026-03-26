@@ -9,23 +9,27 @@ body {
 header {
   background: linear-gradient(135deg, #4CAF50, #2E7D32);
   color: white;
-  padding: 20px 20px 20px 100px; /* espaço pra logo */
+  padding: 20px;
+}
+
+/* CONTAINER DO HEADER */
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
   position: relative;
 }
 
 /* LOGO */
 .logo {
-  width: 60em;        /* ajuste aqui como quiser */
-  height: auto;       /* mantém proporção */
-  position: absolute;
-  left: 20px;
-  top: 50%;
-  transform: translateY(-50%);
+  width: 120px;   /* 👈 AGORA ISSO VAI FUNCIONAR */
+  height: auto;
 }
 
-/* TEXTO DO HEADER */
+/* TEXTO */
 .header-text {
-  text-align: center;
+  text-align: left;
 }
 
 /* ===== MENU ===== */
