@@ -9,7 +9,7 @@ body {
 header {
   background: linear-gradient(135deg, #4CAF50, #2E7D32);
   color: white;
-  padding: 640px;
+  padding: 100px;
 }
 
 /* CONTAINER DO HEADER */
@@ -23,7 +23,7 @@ header {
 
 /* LOGO */
 .logo {
-  width: 80px;   /* 👈 AGORA ISSO VAI FUNCIONAR */
+  width: 200px;   /* 👈 AGORA ISSO VAI FUNCIONAR */
   height: auto;
 }
 
