@@ -15,7 +15,7 @@ header {
 .header-container {
   display: flex;
   align-items: center;
-  justify-content: space-between; /* 👈 separa logo e texto */
+/*  justify-content: space-between; /* 👈 separa logo e texto */
   padding: 0 40px;                /* 👈 espaço nas laterais */
 }
 
