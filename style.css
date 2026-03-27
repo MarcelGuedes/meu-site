@@ -12,6 +12,23 @@ header {
   color: white;
   padding: 50px;
 }
+/* ===== TÍTULO E SUBTÍTULO DO HEADER ===== */
+header h1 {
+  font-family: 'Orbitron', sans-serif; /* fonte futurista */
+  font-size: 48px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+header p {
+  font-family: 'Roboto', sans-serif; /* fonte clean */
+  font-size: 20px;
+  font-weight: 300;
+  margin: 10px 0 0;
+  color: #ccc; /* cinza claro para contraste */
+}
 
 
 .header-container {
