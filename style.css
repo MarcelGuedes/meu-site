@@ -152,6 +152,27 @@ footer {
   background: #2E7D32;
 }
 
+/* ===== RESPONSIVO (celular) ===== */
+@media (max-width: 600px) {
+  header {
+    padding-left: 80px;
+  }
+
+  .logo {
+    width: 60px;
+  }
+
+  nav ul {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  nav li {
+    margin: 10px 0;
+  }
+
+
+
 
 
   
