@@ -84,12 +84,18 @@ h2 {
 }
 
 /* ===== FORMULÁRIO DE CONTATO ===== */
+#contato {
+  max-width: 900px;
+  margin: auto;
+  padding: 40px 20px;
+}
+
 #contato form {
   display: flex;
   flex-direction: column;
   gap: 15px;
   max-width: 500px;
-  margin: 20px auto;
+  margin: 0 auto; /* centraliza dentro da seção */
   background: white;
   padding: 20px;
   border-radius: 8px;
@@ -108,7 +114,8 @@ h2 {
   border-radius: 6px;
   font-family: Arial, sans-serif;
   font-size: 14px;
-  width: 100%;
+  width: 100%; /* garante que não ultrapasse a caixa */
+  box-sizing: border-box; /* evita que padding aumente largura */
 }
 
 #contato button {
