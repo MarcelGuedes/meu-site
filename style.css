@@ -20,12 +20,22 @@ header {
   position: relative;
 }
 
+/* ===== ANIMAÇÃO DO LOGO ===== */
+@keyframes moverLogo {
+  0% {
+    left: 0; /* começa na borda esquerda do header */
+  }
+  100% {
+    left: calc(100% - 200px); /* vai até a borda direita do header */
+  }
+}
+
 .logo {
   position: absolute;
-  left: 20px;
-  width: 150px;
+  top: 20px;
+  width: 200px;
   height: auto;
-  max-width: 25%; /* nunca ultrapassa 1/4 da tela */
+  animation: moverLogo 8s linear infinite alternate;
 }
 
 .header-text {
