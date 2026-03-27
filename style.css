@@ -21,11 +21,21 @@ header {
   position: relative;
 }
 
+/* ===== ANIMAÇÃO DO LOGO ===== */
+@keyframes moverLogo {
+  0% {
+    transform: translateX(100%); /* começa fora da tela à direita */
+  }
+  100% {
+    transform: translateX(-100%); /* termina fora da tela à esquerda */
+  }
+}
+
 .logo {
-  position: absolute;
-  left: 20px;
-  width: 240px;
+  position: relative; /* mantém dentro do fluxo */
+  width: 250px;
   height: auto;
+  animation: moverLogo 10s linear infinite; /* duração 10s, loop infinito */
 }
 
 .header-text {
