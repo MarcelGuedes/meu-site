@@ -15,21 +15,22 @@ header {
 .header-container {
   display: flex;
   align-items: center;
-/*  justify-content: space-between; /* 👈 separa logo e texto */
-  padding: 0 40px;                /* 👈 espaço nas laterais */
+  justify-content: center; /* mantém o texto centralizado */
+  position: relative;
 }
 
-
-/* LOGO */
 .logo {
-  width: 200px;   /* 👈 AGORA ISSO VAI FUNCIONAR */
+  position: absolute;
+  left: 20px;         /* 👈 fixa o logo à esquerda */
+  width: 200px;
   height: auto;
 }
 
-/* TEXTO */
 .header-text {
-  text-align: left;
+  text-align: center;
+  width: 100%;
 }
+
 
 /* ===== MENU ===== */
 nav {
