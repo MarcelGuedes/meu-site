@@ -24,18 +24,17 @@ header {
 /* ===== ANIMAÇÃO DO LOGO ===== */
 @keyframes moverLogo {
   0% {
-    transform: translateX(0); /* começa na esquerda */
+    left: 0; /* começa na borda esquerda do header */
   }
   100% {
-    transform: translateX(calc(100vw - 200px)); /* vai até a direita */
+    left: calc(100% - 200px); /* vai até a borda direita do header */
   }
 }
 
 .logo {
   position: absolute;
-  top: 20px; /* ajusta a altura dentro do header */
-  left: 0;
-  width: 240px;
+  top: 20px;
+  width: 200px;
   height: auto;
   animation: moverLogo 8s linear infinite alternate;
 }
