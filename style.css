@@ -8,10 +8,11 @@ body {
 
 /* ===== HEADER ===== */
 header {
-  background: linear-gradient(135deg, #4CAF50, #2E7D32);
+  background: #000; /* fundo preto */
   color: white;
   padding: 50px;
 }
+
 
 .header-container {
   display: flex;
