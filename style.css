@@ -13,8 +13,6 @@ header {
   color: white;
   padding: 60px 20px;
   box-shadow: 0 4px 20px rgba(0,0,0,0.25);
-  overflow: hidden;
-  position: relative;
 }
 
 .header-container {
@@ -24,55 +22,43 @@ header {
   position: relative;
   max-width: 1200px;
   margin: auto;
-  min-height: 280px;
 }
 
 /* ===== ANIMAÇÃO DO LOGO ===== */
 @keyframes moverLogo {
-
   0% {
-    left: 3%;
+    left: 0;
   }
 
   100% {
-    left: calc(97% - 180px);
+    left: calc(100% - 180px);
   }
-
 }
 
 .logo {
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
+  top: 10px;
   width: 180px;
   height: auto;
-
   animation: moverLogo 10s linear infinite alternate;
-
-  filter:
-    drop-shadow(0 0 12px rgba(0,140,255,0.5));
+  filter: drop-shadow(0 0 12px rgba(0,140,255,0.5));
 }
 
 .header-text {
   text-align: center;
   width: 100%;
-  z-index: 2;
 }
 
-/* ===== TÍTULO ===== */
 header h1 {
   font-family: 'Orbitron', sans-serif;
-  font-size: clamp(42px, 5vw, 72px);
+  font-size: clamp(32px, 4vw, 52px);
   font-weight: 700;
   letter-spacing: 4px;
   margin: 0;
   text-transform: uppercase;
-  color: #00b4ff;
-
-  white-space: nowrap;
+  color: #ffffff;
 }
 
-/* ===== SUBTÍTULO ===== */
 header p {
   font-family: 'Roboto', sans-serif;
   font-size: clamp(16px, 2vw, 22px);
@@ -249,7 +235,6 @@ footer {
 
   .logo {
     position: static;
-    transform: none;
     margin: 0 auto 20px;
     display: block;
     max-width: 120px;
@@ -258,15 +243,6 @@ footer {
 
   .header-container {
     flex-direction: column;
-  }
-
-  .header-text {
-    text-align: center;
-  }
-
-  header h1 {
-    white-space: normal;
-    font-size: clamp(34px, 7vw, 52px);
   }
 
   nav ul {
