@@ -51,12 +51,13 @@ header {
 
 header h1 {
   font-family: 'Orbitron', sans-serif;
-  font-size: clamp(32px, 4vw, 52px);
+  font-size: clamp(42px, 5vw, 72px);
   font-weight: 700;
   letter-spacing: 4px;
   margin: 0;
   text-transform: uppercase;
-  color: #ffffff;
+  color: #00b4ff;
+  white-space: nowrap;
 }
 
 header p {
