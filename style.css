@@ -26,6 +26,7 @@ header {
 
 /* ===== ANIMAÇÃO DO LOGO ===== */
 @keyframes moverLogo {
+
   0% {
     left: 0;
   }
@@ -33,6 +34,7 @@ header {
   100% {
     left: calc(100% - 180px);
   }
+
 }
 
 .logo {
@@ -57,6 +59,8 @@ header h1 {
   margin: 0;
   text-transform: uppercase;
   color: #ffffff;
+
+  white-space: nowrap;
 }
 
 header p {
@@ -261,4 +265,5 @@ footer {
   section {
     padding: 40px 18px;
   }
+
 }
